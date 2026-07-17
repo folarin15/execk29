@@ -8,25 +8,8 @@ export interface INotificationService {
   markAsRead(id: string): Promise<void>;
 }
 
-/* ── Mock implementation ─────────────────────────────────── */
 
-const MOCK: Notification[] = [
-  { id: 'n1', title: 'New Resource', message: 'Anatomy slides uploaded', type: 'info', read: false, timestamp: new Date(Date.now() - 3600000).toISOString() },
-  { id: 'n2', title: 'Announcement', message: 'Exam schedule posted', type: 'warning', read: true, timestamp: new Date(Date.now() - 86400000).toISOString() },
-];
 
-class MockNotificationService implements INotificationService {
-  async getAll(): Promise<Notification[]> {
-    return [...MOCK];
-  }
-  async getUnread(): Promise<Notification[]> {
-    return MOCK.filter(n => !n.read);
-  }
-  async markAsRead(id: string): Promise<void> {
-    const n = MOCK.find(n => n.id === id);
-    if (n) n.read = true;
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 

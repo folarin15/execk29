@@ -11,19 +11,7 @@ export interface IAuthService {
 
 /* ── Mock implementation ─────────────────────────────────── */
 
-class MockAuthService implements IAuthService {
-  async login(_email: string, _password: string): Promise<User> {
-    throw new Error('Supabase auth is required. Configure staff_roles table.');
-  }
 
-  async logout(): Promise<void> {
-    localStorage.removeItem('exec_user');
-  }
-
-  async getCurrentUser(): Promise<User | null> {
-    return null;
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 

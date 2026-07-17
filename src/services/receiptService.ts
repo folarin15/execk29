@@ -11,41 +11,8 @@ export interface IReceiptService {
   getPending(): Promise<Receipt[]>;
 }
 
-/* ── Mock implementation ─────────────────────────────────── */
 
-const MOCK_RECEIPTS: Receipt[] = [
-  { id: 'rec-1', receiptNumber: 'RCP/2025/001', purpose: 'Annual Dues', amount: 5000, date: '2025-01-15', uploadedBy: '3', uploaderRole: 'treasurer', students: ['m1', 'm2'], status: 'verified', verifiedBy: '1', verifiedAt: '2025-01-16' },
-  { id: 'rec-2', receiptNumber: 'RCP/2025/002', purpose: 'Lab Fee', amount: 3000, date: '2025-02-20', uploadedBy: '3', uploaderRole: 'treasurer', students: ['m3'], status: 'pending' },
-];
 
-class MockReceiptService implements IReceiptService {
-  async upload(receipt: Omit<Receipt, 'id' | 'status'>): Promise<Receipt> {
-    const r: Receipt = { ...receipt, id: `rec-${Date.now()}`, status: 'pending' };
-    MOCK_RECEIPTS.push(r);
-    return r;
-  }
-
-  async getAll(): Promise<Receipt[]> {
-    return [...MOCK_RECEIPTS];
-  }
-
-  async getById(id: string): Promise<Receipt | null> {
-    return MOCK_RECEIPTS.find(r => r.id === id) || null;
-  }
-
-  async verify(id: string, userId: string): Promise<Receipt> {
-    const r = MOCK_RECEIPTS.find(r => r.id === id);
-    if (!r) throw new Error('Receipt not found');
-    r.status = 'verified';
-    r.verifiedBy = userId;
-    r.verifiedAt = new Date().toISOString();
-    return r;
-  }
-
-  async getPending(): Promise<Receipt[]> {
-    return MOCK_RECEIPTS.filter(r => r.status === 'pending');
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 

@@ -7,21 +7,8 @@ export interface IActivityService {
   log(entry: Omit<ActivityEntry, 'id'>): Promise<void>;
 }
 
-/* ── Mock implementation ─────────────────────────────────── */
 
-const MOCK: ActivityEntry[] = [
-  { id: 'act-1', action: 'Uploaded resource', actor: 'Admin', actorRole: 'admin', module: 'Resources', timestamp: new Date(Date.now() - 3600000).toISOString(), category: 'upload' },
-  { id: 'act-2', action: 'Verified receipt', actor: 'Auditor', actorRole: 'auditor', module: 'Finance', timestamp: new Date(Date.now() - 7200000).toISOString(), category: 'verify' },
-];
 
-class MockActivityService implements IActivityService {
-  async getRecent(limit?: number): Promise<ActivityEntry[]> {
-    return limit ? MOCK.slice(0, limit) : [...MOCK];
-  }
-  async log(entry: Omit<ActivityEntry, 'id'>): Promise<void> {
-    MOCK.unshift({ ...entry, id: `act-${Date.now()}` });
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 

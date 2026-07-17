@@ -9,38 +9,8 @@ export interface IAnnouncementService {
   getActive(): Promise<Announcement[]>;
 }
 
-/* ── Mock implementation ─────────────────────────────────── */
 
-const MOCK: any[] = [
-  { id: 'a1', title: 'Welcome Week', message: 'Welcome to the new session!', priority: 'High', postedByUid: '1', author: 'Admin', createdAtMs: Date.now() - 86400000 * 3 },
-  { id: 'a2', title: 'Exam Schedule', message: 'Exams start next Monday.', priority: 'Normal', postedByUid: '1', author: 'Admin', createdAtMs: Date.now() - 86400000 },
-];
 
-function mockMap(a: any): Announcement {
-  return {
-    id: a.id,
-    title: a.title || '',
-    content: a.message || '',
-    date: a.createdAtMs ? new Date(a.createdAtMs).toISOString() : new Date().toISOString(),
-    status: 'live',
-    author: a.author || '',
-  };
-}
-
-class MockAnnouncementService implements IAnnouncementService {
-  async publish(announcement: Omit<Announcement, 'id'>): Promise<Announcement> {
-    const id = `a-${Date.now()}`;
-    return { ...announcement, id };
-  }
-
-  async getAll(): Promise<Announcement[]> {
-    return MOCK.map(mockMap);
-  }
-
-  async getActive(): Promise<Announcement[]> {
-    return MOCK.map(mockMap);
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 

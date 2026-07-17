@@ -8,22 +8,8 @@ export interface ICourseService {
   getById(id: string): Promise<Course | null>;
 }
 
-/* ── Mock implementation ─────────────────────────────────── */
 
-const MOCK: Course[] = [
-  { id: 'c1', code: 'ANA101', name: 'Anatomy I' },
-  { id: 'c2', code: 'PHS102', name: 'Physiology I' },
-  { id: 'c3', code: 'BCH101', name: 'Biochemistry I' },
-];
 
-class MockCourseService implements ICourseService {
-  async getAll(): Promise<Course[]> {
-    return [...MOCK];
-  }
-  async getById(id: string): Promise<Course | null> {
-    return MOCK.find(c => c.id === id) || null;
-  }
-}
 
 /* ── Supabase implementation ─────────────────────────────── */
 
