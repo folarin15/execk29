@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { Notification } from '../../types';
-import { ServiceRegistry } from '../../providers/ServiceRegistry';
+import { notificationService } from '../../services';
 
 interface NotificationCenterProps {
   open: boolean;
@@ -14,7 +14,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
 
   useEffect(() => {
     if (open) {
-      ServiceRegistry.notifications.getAll().then(n => {
+      notificationService.getAll().then(n => {
         setNotifications(n);
         setLoading(false);
       });
@@ -34,7 +34,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
   const unread = notifications.filter(n => !n.read);
 
   const handleMarkRead = async (id: string) => {
-    await ServiceRegistry.notifications.markAsRead(id);
+    await notificationService.markAsRead(id);
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
   };
 
@@ -46,7 +46,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
   };
 
   return (
-    <div ref={panelRef} className="absolute top-16 right-6 w-[380px] max-h-[500px] bg-[#fffdf8] border border-[#e3ddd0] rounded-[16px] shadow-[0_18px_50px_rgba(31,34,30,0.11)] flex flex-col z-50 overflow-hidden">
+    <div ref={panelRef} className="fixed md:absolute top-14 md:top-16 right-4 md:right-6 w-[90vw] max-w-[380px] max-h-[80vh] md:max-h-[500px] phys-card flex flex-col z-50 overflow-hidden">
       <div className="flex items-center justify-between px-5 py-4 border-b border-[#e3ddd0]">
         <div className="flex items-center gap-2">
           <span className="material-symbols-rounded text-[18px]">notifications</span>
@@ -95,7 +95,7 @@ export function useNotificationCount() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    ServiceRegistry.notifications.getUnread().then(n => setCount(n.length));
+    notificationService.getUnread().then(n => setCount(n.length));
   }, []);
 
   return count;

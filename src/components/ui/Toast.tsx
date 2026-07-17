@@ -36,7 +36,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ toast: addToast }}>
       {children}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[2000] flex flex-col gap-2 items-center" role="alert" aria-live="polite">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[2000] flex flex-col gap-2 items-center w-[90vw] max-w-[400px]" role="alert" aria-live="polite">
         {items.map(item => (
           <ToastItem key={item.id} item={item} onDone={() => removeToast(item.id)} />
         ))}
@@ -59,7 +59,7 @@ function ToastItem({ item, onDone }: { item: ToastItem; onDone: () => void }) {
 
   return (
     <div
-      className={`px-6 py-3 rounded-full text-[14px] font-[500] text-white shadow-[0_18px_50px_rgba(31,34,30,0.11)] transition-opacity duration-300 ${typeStyles[item.type]} ${visible ? 'opacity-100' : 'opacity-0'}`}
+      className={`px-6 py-3 rounded-full text-[14px] font-[500] text-white shadow-[0_18px_50px_rgba(31,34,30,0.11)] transition-opacity duration-300 truncate ${typeStyles[item.type]} ${visible ? 'opacity-100' : 'opacity-0'}`}
     >
       {item.message}
     </div>

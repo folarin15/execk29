@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { ActivityEntry } from '../../types';
-import { ServiceRegistry } from '../../providers/ServiceRegistry';
+import { activityService } from '../../services';
 import { LoadingSkeleton } from './LoadingSkeleton';
 import { EmptyState } from './EmptyState';
 
@@ -18,7 +18,7 @@ export function ActivityFeed({ limit = 10 }: { limit?: number }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    ServiceRegistry.activity.getRecent(limit).then(data => {
+    activityService.getRecent(limit).then(data => {
       setEntries(data);
       setLoading(false);
     });

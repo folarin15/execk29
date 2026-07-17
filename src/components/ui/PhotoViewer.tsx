@@ -40,7 +40,7 @@ export function PhotoViewer({ open, onClose, photoUrl, name, subtitle, meta, onD
             </div>
           )}
           <button
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer border-none"
+            className="absolute top-4 right-4 w-11 h-11 md:w-10 md:h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer border-none"
             onClick={onClose}
           >
             <span className="material-symbols-rounded text-[20px]">close</span>

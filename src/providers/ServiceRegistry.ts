@@ -1,5 +1,5 @@
 import type { DataProvider } from './DataProvider';
-import { bridgeProvider } from './BridgeProvider';
+import { mockProvider } from './MockProvider';
 
 export class ServiceRegistry {
   private static instance: ServiceRegistry;
@@ -11,7 +11,7 @@ export class ServiceRegistry {
 
   static getInstance(): ServiceRegistry {
     if (!ServiceRegistry.instance) {
-      ServiceRegistry.instance = new ServiceRegistry(bridgeProvider);
+      ServiceRegistry.instance = new ServiceRegistry(mockProvider);
     }
     return ServiceRegistry.instance;
   }
@@ -34,6 +34,8 @@ export class ServiceRegistry {
   static get courses() { return ServiceRegistry.getInstance().getProvider().courses; }
   static get notifications() { return ServiceRegistry.getInstance().getProvider().notifications; }
   static get activity() { return ServiceRegistry.getInstance().getProvider().activity; }
+  static get analytics() { return ServiceRegistry.getInstance().getProvider().analytics; }
+  static get suggestions() { return ServiceRegistry.getInstance().getProvider().suggestions; }
 }
 
 export function useProvider() {

@@ -7,8 +7,10 @@ import { AcademicResources } from './pages/academic/AcademicResources';
 import { FinanceTreasurer } from './pages/finance/FinanceTreasurer';
 import { AuditorVerify } from './pages/auditor/AuditorVerify';
 import { DesignerBirthdays } from './pages/designer/DesignerBirthdays';
-import { SettingsPlaceholder } from './components/ui';
-import React from 'react';
+import { StudyAnalytics } from './pages/admin/StudyAnalytics';
+import { MemberList } from './pages/admin/MemberList';
+import { Suggestions } from './pages/admin/Suggestions';
+import { SettingsPlaceholder, ForcePasswordChange } from './components/ui';
 import { useLocation } from './hooks/useLocation';
 import { ROUTES } from './constants';
 import { LoadingSkeleton } from './components/ui';
@@ -20,6 +22,9 @@ const routeMap: Record<string, () => React.ReactElement> = {
   [ROUTES.FINANCE]: () => <FinanceTreasurer />,
   [ROUTES.AUDITOR]: () => <AuditorVerify />,
   [ROUTES.DESIGNER]: () => <DesignerBirthdays />,
+  [ROUTES.ANALYTICS]: () => <StudyAnalytics />,
+  [ROUTES.MEMBERS]: () => <MemberList />,
+  [ROUTES.SUGGESTIONS]: () => <Suggestions />,
   '/settings': () => <SettingsPlaceholder />,
 };
 
@@ -40,6 +45,10 @@ function Router() {
 
   if (!user) {
     return <LoginPage />;
+  }
+
+  if (user.mustChangePassword) {
+    return <ForcePasswordChange />;
   }
 
   const page = routeMap[pathname] ?? (() => <AdminDashboard />);

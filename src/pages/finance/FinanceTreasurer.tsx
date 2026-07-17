@@ -76,11 +76,11 @@ export function FinanceTreasurer() {
     { key: 'date', header: 'Date', render: (r: Receipt) => <span className="text-[#67706c] text-[13px]">{formatDate(r.date)}</span> },
     { key: 'status', header: '', align: 'right', render: () => (
       <div className="flex gap-2 justify-end">
-        <button className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[rgba(0,0,0,0.03)] cursor-pointer border-none">
-          <span className="material-symbols-rounded text-[#67706c] text-[18px]">visibility</span>
+        <button className="w-9 h-9 md:w-8 md:h-8 rounded-full flex items-center justify-center hover:bg-[rgba(0,0,0,0.03)] cursor-pointer border-none">
+          <span className="material-symbols-rounded text-[#67706c] text-[20px] md:text-[18px]">visibility</span>
         </button>
-        <button className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[rgba(0,0,0,0.03)] cursor-pointer border-none">
-          <span className="material-symbols-rounded text-[#67706c] text-[18px]">download</span>
+        <button className="w-9 h-9 md:w-8 md:h-8 rounded-full flex items-center justify-center hover:bg-[rgba(0,0,0,0.03)] cursor-pointer border-none">
+          <span className="material-symbols-rounded text-[#67706c] text-[20px] md:text-[18px]">download</span>
         </button>
       </div>
     )},
@@ -103,7 +103,7 @@ export function FinanceTreasurer() {
                   config={{ label: 'Upload receipt (PDF or image)', hint: 'Maximum 10MB', accept: '.pdf,.jpg,.jpeg,.png', maxSizeMB: 10 }}
                   onFile={() => {}}
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Input label="Receipt Number" placeholder="e.g. REC-99021" value={form.receiptNumber} onChange={e => setForm(prev => ({ ...prev, receiptNumber: e.target.value }))} />
                   <Input label="Date" type="date" value={form.date} onChange={e => setForm(prev => ({ ...prev, date: e.target.value }))} />
                 </div>
@@ -124,7 +124,7 @@ export function FinanceTreasurer() {
                 <span className="text-[12px] font-[600] uppercase tracking-[0.5px] text-[#67706c]">Class List</span>
                 <span className="text-[12px] font-[600] text-[#2a9d7f]">{selected.length} Selected</span>
               </div>
-              <div className="flex-1 border border-[#e3ddd0] rounded-[10px] overflow-y-auto max-h-[400px]">
+              <div className="flex-1 border border-[#e3ddd0] rounded-[10px] overflow-y-auto max-h-[40vh]">
                 {filteredStudents.length === 0 ? (
                   <EmptyState icon="search" message={searchStudent ? 'No students match your search' : 'No students available'} description={searchStudent ? 'Try a different ID or name.' : 'Student records will appear here.'} />
                 ) : (

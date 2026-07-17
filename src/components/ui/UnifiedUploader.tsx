@@ -56,7 +56,7 @@ export function UnifiedUploader({ config, onFile, multiple = false }: UnifiedUpl
       onDrop={handleDrop}
       onDragOver={e => { e.preventDefault(); setDragOver(true); }}
       onDragLeave={() => setDragOver(false)}
-      className={`border-2 border-dashed rounded-[16px] p-8 flex flex-col items-center justify-center bg-[#fffefa] cursor-pointer transition-all ${
+      className={`border-2 border-dashed rounded-[18px] p-8 flex flex-col items-center justify-center bg-[#fffefa] cursor-pointer transition-all ${
         dragOver ? 'border-[#2a9d7f] bg-[rgba(42,157,127,0.07)]' : 'border-[#e3ddd0] hover:border-[#2a9d7f]'
       }`}
       onClick={() => inputRef.current?.click()}

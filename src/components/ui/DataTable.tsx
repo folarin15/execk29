@@ -26,6 +26,7 @@ export function DataTable<T>({ columns, data, keyExtractor, onRowClick, emptyMes
   }
 
   return (
+    <div className="overflow-x-auto">
     <table className="w-full border-collapse">
       <thead>
         <tr className="border-b border-[#e3ddd0]">
@@ -58,5 +59,6 @@ export function DataTable<T>({ columns, data, keyExtractor, onRowClick, emptyMes
         ))}
       </tbody>
     </table>
+    </div>
   );
 }

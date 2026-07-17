@@ -98,9 +98,9 @@ export function AcademicResources() {
           </PermissionGuard>
         </div>
 
-        <div className="flex gap-4 items-center">
-          <SearchBar placeholder="Search resources..." onSearch={setSearch} className="flex-1 max-w-sm" />
-          <span className="text-[13px] text-[#67706c]">{filtered.length} resources</span>
+        <div className="flex gap-4 items-center flex-wrap">
+          <SearchBar placeholder="Search resources..." onSearch={setSearch} className="flex-1 min-w-[200px] max-w-sm" />
+          <span className="text-[13px] text-[#67706c] whitespace-nowrap">{filtered.length} resources</span>
         </div>
 
         <Card padding="sm">
@@ -125,7 +125,7 @@ export function AcademicResources() {
             </>
           }
         >
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Select label="Course" placeholder="Select course..." value={uploadForm.course} onChange={e => {
               const c = courses.find(crs => crs.name === e.target.value);
               setUploadForm(prev => ({ ...prev, course: e.target.value, courseCode: c?.code || '' }));

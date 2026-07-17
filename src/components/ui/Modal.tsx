@@ -29,7 +29,7 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
       <div className="bg-[#fffdf8] rounded-[24px] max-w-[540px] w-full p-7 shadow-[0_18px_50px_rgba(31,34,30,0.11)] animate-[fadeIn_0.2s_ease]" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-[20px] font-[500] font-['Fraunces',serif] text-[#171b1f]">{title}</h2>
-          <button className="w-9 h-9 rounded-full flex items-center justify-center bg-transparent hover:bg-[rgba(0,0,0,0.03)] transition-colors cursor-pointer border-none" onClick={onClose}>
+          <button className="w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center bg-transparent hover:bg-[rgba(0,0,0,0.03)] transition-colors cursor-pointer border-none" onClick={onClose}>
             <span className="material-symbols-rounded text-[20px]">close</span>
           </button>
         </div>

@@ -49,8 +49,8 @@ export function AuditorVerify() {
           <p className="text-[14px] text-[#67706c]">Review and verify receipt submissions. Read-only — no editing permitted.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <SearchBar placeholder="Search receipt by ID or purpose..." onSearch={setSearch} />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <SearchBar placeholder="Search receipt by ID or purpose..." onSearch={setSearch} className="w-full sm:max-w-md" />
         </div>
 
         {loading ? (
@@ -100,7 +100,7 @@ export function AuditorVerify() {
                       {selected.status === 'verified' ? 'Verified' : 'Pending Verification'}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 text-[13px]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[13px]">
                       <div>
                         <p className="text-[#67706c]">Uploaded By</p>
                         <p className="font-[500] text-[#171b1f]">{selected.uploadedBy}</p>
@@ -122,7 +122,7 @@ export function AuditorVerify() {
                     {selected.studentDetails && selected.studentDetails.length > 0 && (
                       <div>
                         <p className="text-[12px] font-[600] uppercase tracking-[0.5px] text-[#67706c] mb-2">Linked Students (Top 5)</p>
-                        <div className="border border-[#e3ddd0] rounded-[10px] overflow-hidden">
+                        <div className="border border-[#e3ddd0] rounded-[10px] overflow-x-auto">
                           <table className="w-full text-[13px]">
                             <thead className="bg-[rgba(0,0,0,0.02)]">
                               <tr className="border-b border-[#e3ddd0]">

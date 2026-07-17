@@ -7,3 +7,5 @@ export { announcementService } from './announcementService';
 export { courseService } from './courseService';
 export { notificationService } from './notificationService';
 export { activityService } from './activityService';
+export { analyticsService } from './analyticsService';
+export { suggestionService } from './suggestionService';

@@ -1,4 +1,4 @@
-import type { User, Student, Resource, Receipt, Birthday, Announcement, Course, Notification, ActivityEntry, StudentProfile } from '../types';
+import type { User, Student, Resource, Receipt, Birthday, Announcement, Course, Notification, ActivityEntry, StudentProfile, Suggestion, AnalyticsSummary, LeaderboardEntry, WeeklyActivity, EngagementRing, MemberStudyHistory } from '../types';
 
 export interface DataProvider {
   auth: {
@@ -51,5 +51,19 @@ export interface DataProvider {
   activity: {
     getRecent(limit?: number): Promise<ActivityEntry[]>;
     log(entry: Omit<ActivityEntry, 'id'>): Promise<void>;
+  };
+  analytics: {
+    getSummary(): Promise<AnalyticsSummary>;
+    getLeaderboard(): Promise<LeaderboardEntry[]>;
+    getWeeklyActivity(days?: number): Promise<WeeklyActivity[]>;
+    getEngagementRing(): Promise<EngagementRing>;
+    getMemberHistory(memberId: string): Promise<MemberStudyHistory>;
+    getRecentUploads(days?: number): Promise<Resource[]>;
+    getCourseResourceStats(): Promise<{ courseCode: string; count: number; lastUpload: number }[]>;
+  };
+  suggestions: {
+    getAll(): Promise<Suggestion[]>;
+    getById(id: string): Promise<Suggestion | null>;
+    deleteSuggestion(id: string): Promise<void>;
   };
 }

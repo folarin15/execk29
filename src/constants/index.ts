@@ -6,10 +6,12 @@ export const ROUTES = {
   FINANCE: '/finance',
   AUDITOR: '/auditor',
   DESIGNER: '/designer',
+  ANALYTICS: '/analytics',
+  MEMBERS: '/members',
+  SUGGESTIONS: '/suggestions',
 } as const;
 
 export const APP_NAME = 'Executive Portal';
-export const WORKSPACE = 'Workspace Alpha';
 
 export const ROLE_LABELS: Record<string, string> = {
   admin: 'Administrator',

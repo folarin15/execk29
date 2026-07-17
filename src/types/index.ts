@@ -7,6 +7,7 @@ export interface User {
   role: UserRole;
   avatar?: string;
   title?: string;
+  mustChangePassword?: boolean;
 }
 
 export interface Student {
@@ -126,4 +127,80 @@ export interface StudentProfile {
   updatedAt: string;
   email?: string;
   class?: string;
+}
+
+export interface Suggestion {
+  id: string;
+  name: string;
+  matricNumber: string;
+  category: string;
+  message: string;
+  status: 'pending' | 'reviewed' | 'addressed';
+  createdAtMs: number;
+}
+
+export interface QuizAttempt {
+  id: string;
+  memberId: string;
+  memberName?: string;
+  courseCode: string;
+  mode: 'practice' | 'exam';
+  score: number;
+  questionCount: number;
+  percent: number;
+  durationSeconds: number;
+  submittedAtMs: number;
+}
+
+export interface TopicPerformance {
+  memberId: string;
+  topic: string;
+  accuracy: number;
+  attempts: number;
+}
+
+export interface WeeklyActivity {
+  day: string;
+  value: number;
+}
+
+export interface EngagementRing {
+  opened: number;
+  reading: number;
+  done: number;
+  notStarted: number;
+  total: number;
+  percentOpened: number;
+}
+
+export interface LeaderboardEntry {
+  memberId: string;
+  memberName: string;
+  matricNumber: string;
+  attemptCount: number;
+  avgPercent: number;
+  streak: number;
+  lastActive: number;
+}
+
+export interface AnalyticsSummary {
+  totalAttempts: number;
+  avgPercent: number;
+  uniqueStudents: number;
+  avgDuration: number;
+  totalQuizzes: number;
+  totalExams: number;
+  totalStudyMinutes: number;
+  activeToday: number;
+  activeWeek: number;
+  topStreak: number;
+  topStreakMember: string;
+  classAverage: number;
+}
+
+export interface MemberStudyHistory {
+  member: { id: string; name: string; matricNumber: string };
+  attempts: QuizAttempt[];
+  topics: TopicPerformance[];
+  streak: number;
 }

@@ -18,7 +18,7 @@ export function UploadArea({ onFile, accept, label, hint }: UploadAreaProps) {
     <div
       onDrop={handleDrop}
       onDragOver={e => e.preventDefault()}
-      className="border-2 border-dashed border-[#e3ddd0] hover:border-[#2a9d7f] transition-colors rounded-[16px] p-8 flex flex-col items-center justify-center bg-[#fffefa] cursor-pointer"
+      className="border-2 border-dashed border-[#e3ddd0] hover:border-[#2a9d7f] transition-colors rounded-[18px] p-8 flex flex-col items-center justify-center bg-[#fffefa] cursor-pointer"
       onClick={() => {
         const input = document.createElement('input');
         input.type = 'file';

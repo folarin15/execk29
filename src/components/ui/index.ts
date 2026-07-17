@@ -20,3 +20,4 @@ export { PhotoViewer } from './PhotoViewer';
 export { NotificationCenter, useNotificationCount } from './NotificationCenter';
 export { ActivityFeed } from './ActivityFeed';
 export { SettingsPlaceholder } from './SettingsPlaceholder';
+export { ForcePasswordChange } from './ForcePasswordChange';
