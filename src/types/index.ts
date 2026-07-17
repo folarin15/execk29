@@ -12,13 +12,19 @@ export interface User {
 
 export interface Student {
   id: string;
-  studentId: string;
   name: string;
-  email: string;
+  matricNumber: string;
+  fullName?: string;
+  email?: string;
   class?: string;
   avatar?: string;
   dateOfBirth?: string;
   enrollmentStatus?: 'active' | 'inactive' | 'graduated';
+  photoUrl?: string; // General profile photo
+  birthdayPhotoUrl?: string; // Specific birthday photo
+  birthdayRegistrationCompleted?: boolean;
+  lastSeenAt?: string;
+  notificationEnabled?: boolean;
 }
 
 export interface Resource {
@@ -53,6 +59,8 @@ export interface Receipt {
   date: string;
   uploadedBy: string;
   uploaderRole: string;
+  studentIds?: string[]; // Added for linking to multiple students
+  studentDetails?: { id: string; name: string; studentId: string }[]; // For UI display, derived from studentIds
   status: 'pending' | 'verified';
   verifiedBy?: string;
   verifiedAt?: string;

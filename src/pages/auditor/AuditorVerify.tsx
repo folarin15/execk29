@@ -1,22 +1,32 @@
 import { useState, useEffect } from 'react';
 import { Card, Button, SearchBar, Badge, LoadingSkeleton, EmptyState, useToast } from '../../components/ui';
 import { RoleGuard } from '../../permissions';
-import { receiptService } from '../../services';
-import type { Receipt } from '../../types';
+import { receiptService, studentService } from '../../services'; // Import studentService
+import type { Receipt, Student } from '../../types'; // Import Student type
 import { formatDate } from '../../utils/format';
 
 export function AuditorVerify() {
   const { toast } = useToast();
   const [receipts, setReceipts] = useState<Receipt[]>([]);
+  const [students, setStudents] = useState<Student[]>([]); // State for all students
   const [selected, setSelected] = useState<Receipt | null>(null);
   const [loading, setLoading] = useState(true);
   const [verifying, setVerifying] = useState(false);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    receiptService.getAll().then(recs => {
-      setReceipts(recs);
-      setSelected(recs.find(r => r.status === 'pending') || recs[0] || null);
+    Promise.all([
+      receiptService.getAll(),
+      studentService.getAll(), // Fetch all students
+    ]).then(([recs, stus]) => {
+      // Map studentDetails for existing receipts
+      const receiptsWithDetails = recs.map(r => ({
+        ...r,
+        studentDetails: (r.studentIds || []).map(id => stus.find(s => s.id === id)).filter(Boolean) as Student[],
+      }));
+      setReceipts(receiptsWithDetails);
+      setStudents(stus);
+      setSelected(receiptsWithDetails.find(r => r.status === 'pending') || receiptsWithDetails[0] || null);
       setLoading(false);
     });
   }, []);
@@ -31,8 +41,10 @@ export function AuditorVerify() {
     setVerifying(true);
     try {
       const updated = await receiptService.verify(selected.id, 'Auditor');
-      setReceipts(prev => prev.map(r => r.id === updated.id ? updated : r));
-      setSelected(updated);
+      // Re-map studentDetails for the updated receipt
+      const updatedWithDetails = { ...updated, studentDetails: (updated.studentIds || []).map(id => students.find(s => s.id === id)).filter(Boolean) as Student[] };
+      setReceipts(prev => prev.map(r => r.id === updated.id ? updatedWithDetails : r));
+      setSelected(updatedWithDetails);
       toast('Receipt verified successfully', 'success');
     } catch {
       toast('Verification failed', 'error');
@@ -75,7 +87,7 @@ export function AuditorVerify() {
                       </div>
                       <div>
                         <p className="font-[500] text-[14px] text-[#171b1f]">{rec.receiptNumber} - {rec.purpose}</p>
-                        <p className="text-[12px] text-[#67706c]">₦{rec.amount.toLocaleString()} · {formatDate(rec.date)}</p>
+                        <p className="text-[12px] text-[#67706c]">{rec.studentIds?.length || 0} students · {formatDate(rec.date)}</p>
                       </div>
                     </div>
                     <Badge variant={rec.status === 'verified' ? 'mint' : 'clay'}>
@@ -106,13 +118,36 @@ export function AuditorVerify() {
                         <p className="font-[500] text-[#171b1f]">{selected.uploadedBy}</p>
                       </div>
                       <div>
-                        <p className="text-[#67706c]">Uploader Role</p>
-                        <p className="font-[500] text-[#171b1f]">{selected.uploaderRole}</p>
+                        <p className="text-[#67706c]">Student Count</p>
+                        <p className="font-[500] text-[#171b1f]">{selected.studentIds?.length || 0} students</p>
                       </div>
                       <div>
                         <p className="text-[#67706c]">Date Submitted</p>
                         <p className="font-[500] text-[#171b1f]">{formatDate(selected.date)}</p>
                       </div>
+                      {selected.studentDetails && selected.studentDetails.length > 0 && (
+                        <div>
+                          <p className="text-[12px] font-[600] uppercase tracking-[0.5px] text-[#67706c] mb-2">Linked Students (Top 5)</p>
+                          <div className="border border-[#e3ddd0] rounded-[10px] overflow-x-auto">
+                            <table className="w-full text-[13px]">
+                              <thead className="bg-[rgba(0,0,0,0.02)]">
+                                <tr className="border-b border-[#e3ddd0]">
+                                  <th className="px-3 py-2 text-left text-[11px] font-[600] uppercase text-[#67706c]">ID</th>
+                                  <th className="px-3 py-2 text-left text-[11px] font-[600] uppercase text-[#67706c]">Name</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {selected.studentDetails.slice(0, 5).map(s => (
+                                  <tr key={s.id} className="border-b border-[#e3ddd0] last:border-0">
+                                    <td className="px-3 py-2 text-[#67706c]">{s.matricNumber}</td>
+                                    <td className="px-3 py-2">{s.fullName || s.name}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      )}
                       <div>
                         <p className="text-[#67706c]">Verification Status</p>
                         <p className="italic text-[#67706c]">{selected.status === 'verified' ? `Verified by ${selected.verifiedBy || 'Auditor'}` : 'Awaiting auditor review'}</p>
@@ -145,7 +180,7 @@ export function AuditorVerify() {
                     </div>
                     <div className="flex-1">
                       <p className="text-[13px] font-[500] text-[#171b1f]">#{rec.receiptNumber} - {rec.purpose}</p>
-                      <p className="text-[12px] text-[#67706c]">₦{rec.amount.toLocaleString()} Total</p>
+                      <p className="text-[12px] text-[#67706c]">{rec.studentIds?.length || 0} students · ₦{rec.amount.toLocaleString()} Total</p>
                     </div>
                     <div className="text-right">
                       <p className="text-[12px] text-[#67706c]">{formatDate(rec.date)}</p>

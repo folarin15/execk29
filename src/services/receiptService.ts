@@ -25,6 +25,7 @@ class SupabaseReceiptService implements IReceiptService {
       date: receipt.date,
       uploaded_by: receipt.uploadedBy,
       uploader_role: receipt.uploaderRole,
+      student_ids: receipt.studentIds || [], // Added
       status: 'pending',
     }).select().single();
     if (error) throw error;
@@ -68,6 +69,7 @@ class SupabaseReceiptService implements IReceiptService {
       date: r.date || '',
       uploadedBy: r.uploaded_by || '',
       uploaderRole: r.uploader_role || '',
+      studentIds: r.student_ids || [], // Added
       status: r.status || 'pending',
       verifiedBy: r.verified_by,
       verifiedAt: r.verified_at,
