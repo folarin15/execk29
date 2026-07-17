@@ -14,14 +14,14 @@ export function MemberList() {
   const filtered = search
     ? members.filter(m =>
         m.name.toLowerCase().includes(search.toLowerCase()) ||
-        m.studentId.toLowerCase().includes(search.toLowerCase())
+        m.matricNumber.toLowerCase().includes(search.toLowerCase())
       )
     : members;
 
   const exportCsv = () => {
     const header = 'Name,Student ID,Date of Birth,Status';
     const rows = members.map(m =>
-      `"${m.name}","${m.studentId}","${m.dateOfBirth || ''}","${m.enrollmentStatus || 'active'}"`
+      `"${m.name}","${m.matricNumber}","${m.dateOfBirth || ''}","${m.enrollmentStatus || 'active'}"`
     );
     const csv = [header, ...rows].join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -78,7 +78,7 @@ export function MemberList() {
               {filtered.map(m => (
                 <tr key={m.id} className="border-t border-[#e3ddd0] hover:bg-[#f8f6ef] transition-colors">
                   <td className="px-4 py-3 font-[500] text-[#171b1a]">{m.name}</td>
-                  <td className="px-4 py-3 text-[#67706c]">{m.studentId}</td>
+                  <td className="px-4 py-3 text-[#67706c]">{m.matricNumber}</td>
                   <td className="px-4 py-3 text-[#67706c]">{m.dateOfBirth || '—'}</td>
                   <td className="px-4 py-3 text-center">
                     <span className="inline-flex px-2 py-0.5 rounded-full text-[11px] font-[500] bg-[#e6f7f0] text-[#2a9d7f]">

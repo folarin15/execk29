@@ -27,7 +27,7 @@ export function FinanceTreasurer() {
   }, []);
 
   const filteredStudents = students.filter(s =>
-    s.fullName.toLowerCase().includes(searchStudent.toLowerCase()) ||
+    (s.fullName || s.name || '').toLowerCase().includes(searchStudent.toLowerCase()) ||
     s.matricNumber.toLowerCase().includes(searchStudent.toLowerCase())
   );
 
@@ -70,7 +70,7 @@ export function FinanceTreasurer() {
     { key: 'studentIds', header: 'Students', render: (r: Receipt) => (
       <div className="flex items-center gap-2">
         <span className="bg-[rgba(42,157,127,0.13)] text-[#16735c] text-[11px] px-2 py-0.5 rounded-full font-[600]">{r.studentIds?.length || 0}</span>
-        <span className="text-[13px] text-[#67706c]">{r.studentDetails?.slice(0, 2).map(s => s.fullName).join(', ')}{((r.studentIds?.length || 0) > 2) ? ', +' + ((r.studentIds?.length || 0) - 2) : ''}</span>
+        <span className="text-[13px] text-[#67706c]">{r.studentDetails?.slice(0, 2).map(s => s.fullName || s.name || '').join(', ')}{((r.studentIds?.length || 0) > 2) ? ', +' + ((r.studentIds?.length || 0) - 2) : ''}</span>
       </div>
     )},
     { key: 'date', header: 'Date', render: (r: Receipt) => <span className="text-[#67706c] text-[13px]">{formatDate(r.date)}</span> },

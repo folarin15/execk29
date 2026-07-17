@@ -59,8 +59,8 @@ export interface Receipt {
   date: string;
   uploadedBy: string;
   uploaderRole: string;
-  studentIds?: string[]; // Added for linking to multiple students
-  studentDetails?: { id: string; name: string; studentId: string }[]; // For UI display, derived from studentIds
+  studentIds?: string[];
+  studentDetails?: Student[];
   status: 'pending' | 'verified';
   verifiedBy?: string;
   verifiedAt?: string;

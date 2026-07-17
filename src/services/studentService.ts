@@ -18,11 +18,16 @@ export interface IStudentService {
 function supabaseMapMember(row: any): Student {
   return {
     id: row.id,
-    studentId: row.matric_number || '',
-    name: row.full_name || row.name || '',
-    email: '',
+    name: row.name || '',
+    matricNumber: row.matric_number || '',
+    fullName: row.full_name || '',
+    email: row.email || '',
     dateOfBirth: row.date_of_birth || '',
-    enrollmentStatus: 'active',
+    photoUrl: row.photo_url || '',
+    class: row.class || '',
+    enrollmentStatus: row.enrollment_status || 'active',
+    lastSeenAt: row.last_seen_at || '',
+    notificationEnabled: row.notification_enabled || false,
   };
 }
 
