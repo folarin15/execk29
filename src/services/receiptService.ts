@@ -77,7 +77,7 @@ class SupabaseReceiptService implements IReceiptService {
   }
 }
 
-/* ── Singleton ───────────────────────────────────────────── */
+/* ── Singleton export ────────────────────────────────────── */
 
 let _impl: IReceiptService = new SupabaseReceiptService();
 
