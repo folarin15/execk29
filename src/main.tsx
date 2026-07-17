@@ -6,15 +6,9 @@ import { useSupabaseServices } from './services/swap';
 import App from './App';
 import './styles/index.css';
 
-// Use Supabase for production data when not running in bridge mode.
-// In bridge mode (embedded in Student Portal), the bridge backend
-// already wraps Supabase, so services fall back to mock-safe defaults.
-if (!(window as any).__PHYSIOK29_BACKEND__) {
-  useSupabaseServices();
-  console.log('[PhysioK29] Standalone mode — using Supabase services');
-} else {
-  console.log('[PhysioK29] Bridge mode — using bridge provider');
-}
+// Always use Supabase services (exec-bootstrap.js bridge may also be present
+// for embedded mode, but service layer should always hit Supabase directly).
+useSupabaseServices();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -15,14 +15,16 @@ export function AppLayout({ children }: AppLayoutProps) {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8f6ef]">
+    <div className="h-screen flex flex-col bg-[#f8f6ef]">
       <TopBar user={user} />
-      <Sidebar role={user.role} currentPath={pathname} />
-      <main className="flex-1 overflow-y-auto no-scrollbar p-4 md:p-6">
-        <div className="max-w-[1200px] mx-auto">
-          {children}
-        </div>
-      </main>
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar role={user.role} currentPath={pathname} />
+        <main className="flex-1 overflow-y-auto no-scrollbar p-4 md:p-6">
+          <div className="max-w-[1200px] mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
