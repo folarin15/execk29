@@ -44,7 +44,7 @@ export function Sidebar({ role, currentPath }: SidebarProps) {
   return (
     <>
       {/* ── Desktop sidebar ── */}
-      <aside className="hidden lg:flex w-[260px] bg-[#171b1a] text-white flex-col shrink-0 h-full">
+      <aside className="hidden lg:flex w-[260px] bg-[#171b1a] text-white flex-col shrink-0 self-stretch">
         <div className="px-5 py-6">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-9 h-9 rounded-full bg-[#2a9d7f] flex items-center justify-center">
