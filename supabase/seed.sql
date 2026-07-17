@@ -31,6 +31,7 @@ create table staff_roles (
   user_id uuid unique references auth.users(id) on delete cascade,
   role text not null check (role in ('admin','representative','academic','treasurer','auditor','designer')),
   display_name text not null,
+  must_change_password boolean not null default true,
   created_at timestamptz default now()
 );
 
@@ -167,6 +168,7 @@ alter table topic_performance enable row level security;
 
 -- Allow anon SELECT on all tables
 create policy "anon_select_staff_roles" on staff_roles for select using (true);
+create policy "self_update_staff_roles" on staff_roles for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
 create policy "anon_select_members" on members for select using (true);
 create policy "anon_select_courses" on courses for select using (true);
 create policy "anon_select_resources" on resources for select using (true);

@@ -33,16 +33,17 @@ export function ForcePasswordChange() {
       const { error: updateError } = await supabase.auth.updateUser({ password: newPassword });
       if (updateError) throw updateError;
 
+      setSuccess(true);
+
+      // Best-effort: clear the must_change_password flag
       const { error: rpcError } = await supabase.rpc('clear_must_change_password', { uid: user!.id });
       if (rpcError) {
-        const { error: directError } = await supabase
+        await supabase
           .from('staff_roles')
           .update({ must_change_password: false })
           .eq('user_id', user!.id);
-        if (directError) throw directError;
       }
 
-      setSuccess(true);
       setTimeout(() => window.location.reload(), 1200);
     } catch (err: any) {
       setError(err.message || 'Failed to update password');
