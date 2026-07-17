@@ -3,6 +3,7 @@ import { Card } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/Badge';
 import { LoadingSkeleton } from '../../components/ui/LoadingSkeleton';
 import { useLocation } from '../../hooks/useLocation';
+import { useAuth } from '../../contexts/AuthContext';
 import { analyticsService } from '../../services';
 import type { AnalyticsSummary } from '../../types';
 
@@ -17,6 +18,7 @@ const modules = [
 
 export function AdminDashboard() {
   const { navigate } = useLocation();
+  const { user } = useAuth();
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-['Fraunces',serif] text-[28px] font-[600] text-[#171b1a]">Welcome back, Admin.</h1>
+        <h1 className="font-['Fraunces',serif] text-[28px] font-[600] text-[#171b1a]">Welcome back, {user?.name || 'Admin'}.</h1>
         <p className="text-[14px] text-[#67706c]">System status is operational.</p>
       </div>
 
