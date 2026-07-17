@@ -86,7 +86,7 @@ export function LoginPage() {
                 <span className="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-[#67706c] text-[18px]">person</span>
                 <input
                   className="w-full pl-10 pr-3.5 py-2.5 border border-[#e3ddd0] rounded-[10px] text-[15px] bg-[#fffdf8] text-[#171b1f] outline-none focus:border-[#2a9d7f] focus:shadow-[0_0_0_3px_rgba(42,157,127,0.13)] transition-all"
-                  placeholder="you@ui.edu.ng"
+                  placeholder="YusmanIgbobamiji@gmail.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
