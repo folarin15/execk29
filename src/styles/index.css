@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f8f6ef;
+  --color-ink: #171b1f;
+  --color-muted: #67706c;
+  --color-panel: #fffdf8;
+  --color-line: #e3ddd0;
+  --color-sidebar-bg: #171b1a;
+  --color-sidebar-soft: #222927;
+  --color-mint: #2a9d7f;
+  --color-mint-dark: #16735c;
+  --color-mint-soft: rgba(42, 157, 127, 0.13);
+  --color-clay: #d96f4d;
+  --color-citron: #d8c74d;
+  --color-plum: #5c3f7d;
+  --color-sky: #5fa8d3;
+  --color-card-bg: #fffefa;
+  --color-text: #171b1f;
+
+  --font-family-body: "Instrument Sans", Aptos, "Segoe UI Variable Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: "Fraunces", "Instrument Sans", "Aptos Display", "Segoe UI Variable Display", serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+.material-symbols-rounded {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  font-family: "Material Symbols Rounded";
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

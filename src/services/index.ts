@@ -1,0 +1,9 @@
+export { authService } from './authService';
+export { studentService } from './studentService';
+export { resourceService } from './resourceService';
+export { receiptService } from './receiptService';
+export { birthdayService } from './birthdayService';
+export { announcementService } from './announcementService';
+export { courseService } from './courseService';
+export { notificationService } from './notificationService';
+export { activityService } from './activityService';
