@@ -110,17 +110,24 @@ class SupabaseAnalyticsService implements IAnalyticsService {
       id: `qa-${r.id}`,
       memberId: r.member_id,
       courseCode: r.course_code || '',
+      topic: r.topic || undefined,
       mode: (r.mode || 'practice') as 'practice' | 'exam',
       score: Number(r.score || 0),
       questionCount: Number(r.question_count || 0),
       percent: Number(r.percent || 0),
       durationSeconds: Number(r.duration_seconds || 0),
+      motivationText: r.motivation_text || undefined,
+      startedAtMs: r.started_at ? new Date(r.started_at).getTime() : undefined,
       submittedAtMs: r.submitted_at ? new Date(r.submitted_at).getTime() : 0,
     }));
     const t = (topics.data || []).map((r: any) => ({
       memberId: r.member_id,
+      courseCode: r.course_code || undefined,
       topic: r.topic || '',
-      accuracy: Number(r.accuracy || 0),
+      correct: r.correct != null ? Number(r.correct) : undefined,
+      accuracy: r.correct != null && r.attempts > 0
+        ? Math.round((Number(r.correct) / Number(r.attempts)) * 100)
+        : Number(r.accuracy || 0),
       attempts: Number(r.attempts || 0),
     }));
     return {

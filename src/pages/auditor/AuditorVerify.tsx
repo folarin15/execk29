@@ -75,7 +75,7 @@ export function AuditorVerify() {
                       </div>
                       <div>
                         <p className="font-[500] text-[14px] text-[#171b1f]">{rec.receiptNumber} - {rec.purpose}</p>
-                        <p className="text-[12px] text-[#67706c]">{rec.students.length} students · {formatDate(rec.date)}</p>
+                        <p className="text-[12px] text-[#67706c]">₦{rec.amount.toLocaleString()} · {formatDate(rec.date)}</p>
                       </div>
                     </div>
                     <Badge variant={rec.status === 'verified' ? 'mint' : 'clay'}>
@@ -106,8 +106,8 @@ export function AuditorVerify() {
                         <p className="font-[500] text-[#171b1f]">{selected.uploadedBy}</p>
                       </div>
                       <div>
-                        <p className="text-[#67706c]">Student Count</p>
-                        <p className="font-[500] text-[#171b1f]">{selected.students.length} students</p>
+                        <p className="text-[#67706c]">Uploader Role</p>
+                        <p className="font-[500] text-[#171b1f]">{selected.uploaderRole}</p>
                       </div>
                       <div>
                         <p className="text-[#67706c]">Date Submitted</p>
@@ -119,29 +119,7 @@ export function AuditorVerify() {
                       </div>
                     </div>
 
-                    {selected.studentDetails && selected.studentDetails.length > 0 && (
-                      <div>
-                        <p className="text-[12px] font-[600] uppercase tracking-[0.5px] text-[#67706c] mb-2">Linked Students (Top 5)</p>
-                        <div className="border border-[#e3ddd0] rounded-[10px] overflow-x-auto">
-                          <table className="w-full text-[13px]">
-                            <thead className="bg-[rgba(0,0,0,0.02)]">
-                              <tr className="border-b border-[#e3ddd0]">
-                                <th className="px-3 py-2 text-left text-[11px] font-[600] uppercase text-[#67706c]">ID</th>
-                                <th className="px-3 py-2 text-left text-[11px] font-[600] uppercase text-[#67706c]">Name</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {selected.studentDetails.slice(0, 5).map(s => (
-                                <tr key={s.id} className="border-b border-[#e3ddd0] last:border-0">
-                                  <td className="px-3 py-2 text-[#67706c]">{s.studentId}</td>
-                                  <td className="px-3 py-2">{s.name}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    )}
+
 
                     {selected.status === 'pending' && (
                       <Button className="w-full" icon="verified" onClick={handleVerify} loading={verifying}>Verify Receipt</Button>
@@ -167,7 +145,7 @@ export function AuditorVerify() {
                     </div>
                     <div className="flex-1">
                       <p className="text-[13px] font-[500] text-[#171b1f]">#{rec.receiptNumber} - {rec.purpose}</p>
-                      <p className="text-[12px] text-[#67706c]">{rec.students.length} students · ₦{rec.amount.toLocaleString()} Total</p>
+                      <p className="text-[12px] text-[#67706c]">₦{rec.amount.toLocaleString()} Total</p>
                     </div>
                     <div className="text-right">
                       <p className="text-[12px] text-[#67706c]">{formatDate(rec.date)}</p>

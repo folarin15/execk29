@@ -29,7 +29,8 @@ function supabaseMapBirthday(row: any): Birthday | null {
     studentName: row.full_name || row.name || '',
     dateOfBirth: row.date_of_birth || '',
     birthDate: `${day} ${month}`,
-    photoUrl: row.photo_url || '',
+    photoUrl: row.birthday_photo_url || row.photo_url || '',
+    birthdayPhotoUrl: row.birthday_photo_url || '',
     daysUntilBirthday: diff >= 0 ? diff : diff + 365,
     isToday: diff === 0,
     month,
@@ -40,7 +41,7 @@ function supabaseMapBirthday(row: any): Birthday | null {
 class SupabaseBirthdayService implements IBirthdayService {
   async getUpcoming(month?: number): Promise<Birthday[]> {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const { data, error } = await supabase.from('members').select('id, full_name, name, matric_number, date_of_birth, photo_url').not('date_of_birth', 'is', null);
+    const { data, error } = await supabase.from('members').select('id, full_name, name, matric_number, date_of_birth, photo_url, birthday_photo_url').not('date_of_birth', 'is', null);
     if (error) return [];
     let birthdays = (data || []).map(supabaseMapBirthday).filter(Boolean) as Birthday[];
     if (month !== undefined) {
@@ -51,7 +52,7 @@ class SupabaseBirthdayService implements IBirthdayService {
   }
 
   async getByStudentId(studentId: string): Promise<Birthday | null> {
-    const { data, error } = await supabase.from('members').select('id, full_name, name, matric_number, date_of_birth, photo_url').or(`id.eq.${studentId},matric_number.eq.${studentId}`).maybeSingle();
+    const { data, error } = await supabase.from('members').select('id, full_name, name, matric_number, date_of_birth, photo_url, birthday_photo_url').or(`id.eq.${studentId},matric_number.eq.${studentId}`).maybeSingle();
     if (error || !data) return null;
     return supabaseMapBirthday(data);
   }

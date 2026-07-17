@@ -25,6 +25,7 @@ export interface Resource {
   id: string;
   course: string;
   courseCode: string;
+  courseTitle?: string;
   week: number;
   title: string;
   fileName: string;
@@ -32,7 +33,16 @@ export interface Resource {
   fileSize: number;
   uploadDate: string;
   uploadedBy: string;
+  uploadedByUserId?: string;
   fileUrl?: string;
+  storagePath?: string;
+  downloadUrl?: string;
+  type?: string;
+  note?: string;
+  lectureDate?: string;
+  lectureTopic?: string;
+  lectureVenue?: string;
+  uploadCategory?: string;
 }
 
 export interface Receipt {
@@ -43,8 +53,6 @@ export interface Receipt {
   date: string;
   uploadedBy: string;
   uploaderRole: string;
-  students: string[];
-  studentDetails?: { id: string; name: string; studentId: string }[];
   status: 'pending' | 'verified';
   verifiedBy?: string;
   verifiedAt?: string;
@@ -58,6 +66,7 @@ export interface Birthday {
   dateOfBirth: string;
   birthDate: string;
   photoUrl?: string;
+  birthdayPhotoUrl?: string;
   daysUntilBirthday: number;
   isToday: boolean;
   month: string;
@@ -144,17 +153,22 @@ export interface QuizAttempt {
   memberId: string;
   memberName?: string;
   courseCode: string;
+  topic?: string;
   mode: 'practice' | 'exam';
   score: number;
   questionCount: number;
   percent: number;
   durationSeconds: number;
+  motivationText?: string;
+  startedAtMs?: number;
   submittedAtMs: number;
 }
 
 export interface TopicPerformance {
   memberId: string;
+  courseCode?: string;
   topic: string;
+  correct?: number;
   accuracy: number;
   attempts: number;
 }
