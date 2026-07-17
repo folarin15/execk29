@@ -157,11 +157,7 @@ class SupabaseStudentService implements IStudentService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IStudentService = new MockStudentService();
-
-export function useSupabaseStudentService(): void {
-  _impl = new SupabaseStudentService();
-}
+let _impl: IStudentService = new SupabaseStudentService();
 
 export const studentService: IStudentService = {
   search: q => _impl.search(q),

@@ -36,11 +36,7 @@ class SupabaseActivityService implements IActivityService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IActivityService = new MockActivityService();
-
-export function useSupabaseActivityService(): void {
-  _impl = new SupabaseActivityService();
-}
+let _impl: IActivityService = new SupabaseActivityService();
 
 export const activityService: IActivityService = {
   getRecent: l => _impl.getRecent(l),

@@ -122,11 +122,7 @@ class SupabaseResourceService implements IResourceService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IResourceService = new MockResourceService();
-
-export function useSupabaseResourceService(): void {
-  _impl = new SupabaseResourceService();
-}
+let _impl: IResourceService = new SupabaseResourceService();
 
 export const resourceService: IResourceService = {
   create: r => _impl.create(r),

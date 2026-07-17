@@ -80,11 +80,7 @@ class SupabaseAuthService implements IAuthService {
 
 /* ── Singleton (auto-selects implementation) ─────────────── */
 
-let _impl: IAuthService = new MockAuthService();
-
-export function useSupabaseAuth(): void {
-  _impl = new SupabaseAuthService();
-}
+let _impl: IAuthService = new SupabaseAuthService();
 
 export const authService: IAuthService = {
   login: (email, password) => _impl.login(email, password),

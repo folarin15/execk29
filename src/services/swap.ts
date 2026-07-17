@@ -1,28 +1,5 @@
-import { useSupabase as useSupabaseConfig } from './config';
-import { useSupabaseAuth } from './authService';
-import { useSupabaseStudentService } from './studentService';
-import { useSupabaseResourceService } from './resourceService';
-import { useSupabaseAnnouncementService } from './announcementService';
-import { useSupabaseSuggestionService } from './suggestionService';
-import { useSupabaseAnalyticsService } from './analyticsService';
-import { useSupabaseBirthdayService } from './birthdayService';
-import { useSupabaseReceiptService } from './receiptService';
-import { useSupabaseCourseService } from './courseService';
-import { useSupabaseNotificationService } from './notificationService';
-import { useSupabaseActivityService } from './activityService';
-
+// Supabase services are set as default in each service file.
+// This module exists only for backward compatibility.
 export function useSupabaseServices(): void {
-  useSupabaseConfig();
-  useSupabaseAuth();
-  useSupabaseStudentService();
-  useSupabaseResourceService();
-  useSupabaseAnnouncementService();
-  useSupabaseSuggestionService();
-  useSupabaseAnalyticsService();
-  useSupabaseBirthdayService();
-  useSupabaseReceiptService();
-  useSupabaseCourseService();
-  useSupabaseNotificationService();
-  useSupabaseActivityService();
-  console.log('[Services] Switched to Supabase provider');
+  // No-op — all services already default to Supabase implementations.
 }

@@ -82,11 +82,7 @@ class SupabaseAnnouncementService implements IAnnouncementService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IAnnouncementService = new MockAnnouncementService();
-
-export function useSupabaseAnnouncementService(): void {
-  _impl = new SupabaseAnnouncementService();
-}
+let _impl: IAnnouncementService = new SupabaseAnnouncementService();
 
 export const announcementService: IAnnouncementService = {
   publish: a => _impl.publish(a),

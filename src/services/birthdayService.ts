@@ -105,11 +105,7 @@ class SupabaseBirthdayService implements IBirthdayService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IBirthdayService = new MockBirthdayService();
-
-export function useSupabaseBirthdayService(): void {
-  _impl = new SupabaseBirthdayService();
-}
+let _impl: IBirthdayService = new SupabaseBirthdayService();
 
 export const birthdayService: IBirthdayService = {
   getUpcoming: m => _impl.getUpcoming(m),

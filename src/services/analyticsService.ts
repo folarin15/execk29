@@ -277,11 +277,7 @@ class SupabaseAnalyticsService implements IAnalyticsService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IAnalyticsService = new MockAnalyticsService();
-
-export function useSupabaseAnalyticsService(): void {
-  _impl = new SupabaseAnalyticsService();
-}
+let _impl: IAnalyticsService = new SupabaseAnalyticsService();
 
 export const analyticsService: IAnalyticsService = {
   getSummary: () => _impl.getSummary(),

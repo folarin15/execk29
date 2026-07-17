@@ -42,11 +42,7 @@ class SupabaseCourseService implements ICourseService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: ICourseService = new MockCourseService();
-
-export function useSupabaseCourseService(): void {
-  _impl = new SupabaseCourseService();
-}
+let _impl: ICourseService = new SupabaseCourseService();
 
 export const courseService: ICourseService = {
   getAll: () => _impl.getAll(),

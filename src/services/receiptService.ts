@@ -112,11 +112,7 @@ class SupabaseReceiptService implements IReceiptService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: IReceiptService = new MockReceiptService();
-
-export function useSupabaseReceiptService(): void {
-  _impl = new SupabaseReceiptService();
-}
+let _impl: IReceiptService = new SupabaseReceiptService();
 
 export const receiptService: IReceiptService = {
   upload: r => _impl.upload(r),

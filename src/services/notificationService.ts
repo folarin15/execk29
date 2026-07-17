@@ -44,11 +44,7 @@ class SupabaseNotificationService implements INotificationService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: INotificationService = new MockNotificationService();
-
-export function useSupabaseNotificationService(): void {
-  _impl = new SupabaseNotificationService();
-}
+let _impl: INotificationService = new SupabaseNotificationService();
 
 export const notificationService: INotificationService = {
   getAll: () => _impl.getAll(),

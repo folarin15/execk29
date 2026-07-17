@@ -80,11 +80,7 @@ class SupabaseSuggestionService implements ISuggestionService {
 
 /* ── Singleton ───────────────────────────────────────────── */
 
-let _impl: ISuggestionService = new MockSuggestionService();
-
-export function useSupabaseSuggestionService(): void {
-  _impl = new SupabaseSuggestionService();
-}
+let _impl: ISuggestionService = new SupabaseSuggestionService();
 
 export const suggestionService: ISuggestionService = {
   getAll: () => _impl.getAll(),
