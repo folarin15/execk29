@@ -74,7 +74,7 @@ export function FinanceTreasurer() {
       </div>
     )},
     { key: 'date', header: 'Date', render: (r: Receipt) => <span className="text-[#67706c] text-[13px]">{formatDate(r.date)}</span> },
-    { key: 'status', header: '', align: 'right', render: (r: Receipt) => (
+    { key: 'status', header: '', align: 'right', render: () => (
       <div className="flex gap-2 justify-end">
         <button className="w-9 h-9 md:w-8 md:h-8 rounded-full flex items-center justify-center hover:bg-[rgba(0,0,0,0.03)] cursor-pointer border-none">
           <span className="material-symbols-rounded text-[#67706c] text-[20px] md:text-[18px]">visibility</span>
